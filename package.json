@@ -1,0 +1,26 @@
+{
+  "name": "rock-solid-sms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "gcloud app deploy",
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "david-j-davis <admin@marmt.io>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Marmt-Group/chat-to-sms.git"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0",
+    "twilio": "^3.31.1"
+  },
+  "engines": {
+    "node": "10.x.x"
+  }
+}
