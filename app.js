@@ -2,6 +2,7 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const twilio = require('twilio')
 
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
@@ -35,7 +36,7 @@ app.post('/chat', (req, res, next) => {
         return
     }
 
-    const client = require('twilio')(twilioAccountSid, twilioAuthToken)
+    const client = twilio(twilioAccountSid, twilioAuthToken)
     
     try {
 
