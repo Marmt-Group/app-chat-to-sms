@@ -33,6 +33,7 @@ import openSocket from 'socket.io-client'
 const socket = openSocket('https://<your-app>.appspot.com')
 
 socket.on('sms message', (newSMSreceived) => handleSMSFunction(newSMSreceived))
+...
 
 fetch('https://<your-app>.appspot.com/chat', {
       method: 'POST',
