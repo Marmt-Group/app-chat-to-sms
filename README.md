@@ -22,6 +22,27 @@ $ gcloud deploy
 * Twillio SMS programmable
 * Deployed on Google App Engine
 
+## Example Usage on the front-end
+
+```javascript
+fetch('https://<your-app>.appspot.com/chat', {
+      method: 'POST',
+      body: JSON.stringify(
+          { 
+              query: { 
+                  fromNumber: '+188888888', // Twilio sms number
+                  toNumber: '+199999999', // Your client's number
+                  twilioAccountSid: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX', // retrieve from Twilio console
+                  twilioAuthToken: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' // retrieve from Twilio console
+              },
+              message: message
+          }),
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  })
+```
+
 ## Contributing
 
 Submit a [pull request](https://github.com/Marmt-Group/chat-to-sms/pulls)
