@@ -10,7 +10,7 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/sms', (req, res) => {
-    // get request from chatbot
+    // get message from Twilio
     const messageFromUser = req.query.Body
 
     try {

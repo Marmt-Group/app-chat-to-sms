@@ -29,6 +29,11 @@ You need to set up the **a message comes in** webhook in for your Twilio SMS num
 ## Example Usage on the front-end
 
 ```javascript
+import openSocket from 'socket.io-client'
+const socket = openSocket('https://<your-app>.appspot.com')
+
+socket.on('sms message', (newSMSreceived) => handleSMSFunction(newSMSreceived))
+
 fetch('https://<your-app>.appspot.com/chat', {
       method: 'POST',
       body: JSON.stringify(
