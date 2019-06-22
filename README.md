@@ -17,7 +17,7 @@ $ gcloud deploy
 ```
 
 ## Set up Twilio webhook
-You need to set up the 'a message comes in' webhook in for your Twilio SMS number. Make sure it's set to HTTP GET
+You need to set up the **a message comes in** webhook in for your Twilio SMS number, with the deployed app to app engine url. The url needs to end with `/sms`. Make sure it's set to HTTP GET
 ![image](https://user-images.githubusercontent.com/3498223/59966841-c0332400-94d6-11e9-81a5-d6f228b4f018.png)
 
 ## Features
