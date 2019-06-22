@@ -26,31 +26,69 @@ You need to set up the **a message comes in** webhook in for your Twilio SMS num
 * Twillio SMS programmable
 * Deployed on Google App Engine
 
-## Example Usage on the front-end
+## Usage example on the front-end with React
 
 ```javascript
-import openSocket from 'socket.io-client'
-const socket = openSocket('https://<your-app>.appspot.com')
+import React from 'react'
+import openSocket from 'socket.io-client';
+const socket = openSocket('https://<your-app>.appspot.com');
 
-socket.on('sms message', (newSMSreceived) => handleSMSFunction(newSMSreceived))
-...
+class FormChatBot extends React.Component {
+    constructor(props) {
+        super(props)
+        this.messageInput = React.createRef();
 
-fetch('https://<your-app>.appspot.com/chat', {
-      method: 'POST',
-      body: JSON.stringify(
-          { 
-              query: { 
-                  fromNumber: '+188888888', // Twilio sms number
-                  toNumber: '+199999999', // Your client's number
-                  twilioAccountSid: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX', // retrieve from Twilio console
-                  twilioAuthToken: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' // retrieve from Twilio console
-              },
-              message: message
-          }),
-      headers: {
-          'Content-Type': 'application/json'
-      }
-  })
+        socket.on('sms message', (newSMS) => this.handleSMSChange(newSMS));
+
+        this.state = {
+            textMessage: ''
+        }
+    }
+
+    handleSMSChange = (sms) => {
+        const message = JSON.stringify(sms.messageFromUser)
+        alert(message)
+    }
+
+    handleChange = (event) => {
+        this.setState({ textMessage: event.target.value });
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault()
+        const message = this.state.textMessage
+
+        fetch('https://<your-app>.appspot.com/chat', {
+            method: 'POST',
+            body: JSON.stringify(
+                { 
+                    query: { 
+                        fromNumber: '+1888888888', // Twilio purchased sms number
+                        toNumber: '+1999999999', // your client's number
+                        twilioAccountSid: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX', // retrieve from Twilio console
+                        twilioAuthToken: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' // retrieve from Twilio console
+                    },
+                    message: message
+                }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .catch(error => console.error(error))
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <div ref={this.messageInput}></div>
+                <input type="text" value={this.state.textMessage} onChange={this.handleChange}></input>
+                <input type="submit" value="Submit"></input>
+            </form>
+        )
+    }
+}
+
+export default FormChatBot
 ```
 
 ## Contributing
