@@ -1,6 +1,6 @@
 # Chat application to SMS
 
-This application can be utilized by any frontend framework for chat to sms. 
+This application can be utilized by any frontend framework for chat to sms. A user on a website chats and you receive and respond by text message on your phone.
 
 ## Installation
 1. Download zip or clone: `git clone https://github.com/Marmt-Group/chat-to-sms.git`
