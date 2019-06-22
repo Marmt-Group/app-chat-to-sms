@@ -9,8 +9,12 @@ This application can be utilized by any frontend framework for chat to sms.
 
 ## Deploy
 Once you clone `npm i` isn't necessary
+
 > you can just deploy right away with 
-`gcloud deploy`
+
+```shell
+$ gcloud deploy
+```
 
 ## Features
 * Node/Express.js
@@ -20,7 +24,7 @@ Once you clone `npm i` isn't necessary
 
 ## Contributing
 
-Clone repo and submit a [pull request](https://github.com/Marmt-Group/chat-to-sms/pulls)
+Submit a [pull request](https://github.com/Marmt-Group/chat-to-sms/pulls)
 
 ## License
 
