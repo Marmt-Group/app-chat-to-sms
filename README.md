@@ -36,7 +36,6 @@ const socket = openSocket('https://<your-app>.appspot.com');
 class FormChatBot extends React.Component {
     constructor(props) {
         super(props)
-        this.messageInput = React.createRef();
 
         socket.on('sms message', (newSMS) => this.handleSMSChange(newSMS));
 
@@ -80,7 +79,6 @@ class FormChatBot extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <div ref={this.messageInput}></div>
                 <input type="text" value={this.state.textMessage} onChange={this.handleChange}></input>
                 <input type="submit" value="Submit"></input>
             </form>
