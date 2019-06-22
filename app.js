@@ -9,7 +9,7 @@ const io = require('socket.io')(server)
 app.use(cors())
 app.use(express.json())
 
-app.get('/sms', (req, res) => {
+app.get('/sms', (req, res, next) => {
     // get message from Twilio
     const messageFromUser = req.query.Body
 
