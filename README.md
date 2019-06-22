@@ -8,13 +8,19 @@ This application can be utilized by any frontend framework for chat to sms.
 3. Open a Google account, and install [gcloud](https://cloud.google.com/sdk/install).
 
 ## Deploy
-Once you clone `npm i` isn't necessary, you can just deploy right away with `gcloud deploy`
+Once you clone `npm i` isn't necessary
+> you can just deploy right away with 
+`gcloud deploy`
 
 ## Features
 * Node/Express.js
 * Socket.io
 * Twillio SMS programmable
 * Deployed on Google App Engine
+
+## Contributing
+
+Clone repo and submit a [pull request](https://github.com/Marmt-Group/chat-to-sms/pulls)
 
 ## License
 
