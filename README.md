@@ -26,37 +26,30 @@ You need to set up the **a message comes in** webhook in for your Twilio SMS num
 * Twillio SMS programmable
 * Deployed on Google App Engine
 
-## Usage example on the front-end with React
+## Front-end Integration
+You can use any sort of front-end, but as an example, [react-chat-widget](https://www.npmjs.com/package/react-chat-widget) integrates very nicely:
+
+![demonstration](./chat-demonstration.gif)
 
 ```javascript
 import React from 'react'
+import { Widget, addResponseMessage } from 'react-chat-widget';
+import 'react-chat-widget/lib/styles.css';
 import openSocket from 'socket.io-client';
+
 const socket = openSocket('https://<your-app>.appspot.com');
 
 class FormChatBot extends React.Component {
     constructor(props) {
         super(props)
+        this.messageInput = React.createRef();
 
-        socket.on('sms message', (newSMS) => this.handleSMSChange(newSMS));
+        socket.on('sms message', (sms) => this.handleAddResponseMessage(sms));
 
-        this.state = {
-            textMessage: ''
-        }
     }
 
-    handleSMSChange = (sms) => {
-        const message = JSON.stringify(sms.messageFromUser)
-        alert(message)
-    }
-
-    handleChange = (event) => {
-        this.setState({ textMessage: event.target.value });
-    }
-
-    handleSubmit = (event) => {
-        event.preventDefault()
-        const message = this.state.textMessage
-
+    handleNewUserMessage = (newMessage) => {
+        
         fetch('https://<your-app>.appspot.com/chat', {
             method: 'POST',
             body: JSON.stringify(
@@ -67,21 +60,31 @@ class FormChatBot extends React.Component {
                         twilioAccountSid: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX', // retrieve from Twilio console
                         twilioAuthToken: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' // retrieve from Twilio console
                     },
-                    message: message
+                    message: newMessage
                 }),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
         .catch(error => console.error(error))
+        
+    }
+
+    handleAddResponseMessage = (response) => {
+        const message = response.messageFromUser
+        const messageToStr = message.toString()
+        addResponseMessage(messageToStr)
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <input type="text" value={this.state.textMessage} onChange={this.handleChange}></input>
-                <input type="submit" value="Submit"></input>
-            </form>
+
+            <div className="App">
+                <Widget
+                    handleNewUserMessage={this.handleNewUserMessage}
+                />
+            </div>
+
         )
     }
 }
