@@ -15,7 +15,7 @@ app.get('/sms', (req, res, next) => {
     const messageFromUser = req.query.Body
 
     try {
-        // emit sms message to chat application
+        // emit sms message to chat app
         io.emit('sms message', { messageFromUser });
         res.send('SMS received');
     } catch (err) {
@@ -39,7 +39,7 @@ app.post('/chat', (req, res, next) => {
     const client = twilio(twilioAccountSid, twilioAuthToken)
     
     try {
-
+        // Send message from chat app to the client's cell phone
         client.messages
             .create({
                 body: message,
