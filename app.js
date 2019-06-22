@@ -17,7 +17,7 @@ app.get('/sms', (req, res, next) => {
     try {
         // emit sms message to chat app
         io.emit('sms message', { messageFromUser });
-        res.send('SMS received');
+        return res.send('SMS received');
     } catch (err) {
         next(err)
     }
@@ -32,8 +32,7 @@ app.post('/chat', (req, res, next) => {
     const message = req.body.message
 
     if (!twilioAccountSid || !twilioAuthToken) {
-        res.status(500).send('Missing sms programmable credentials')
-        return
+        return res.status(500).send('Missing sms programmable credentials')
     }
 
     const client = twilio(twilioAccountSid, twilioAuthToken)
@@ -47,7 +46,7 @@ app.post('/chat', (req, res, next) => {
                 to: toNumber
             })
             .then(message => {
-                res.status(200).send(message.sid)
+                return res.status(200).send(message.sid)
             });
 
     } catch (err) {
