@@ -1,1 +1,3 @@
-# GCP App Engine Socket.io server for SMS Chatbot
+# Chat application to SMS
+
+This application can be utilized by any frontend framework for chat to sms. 
