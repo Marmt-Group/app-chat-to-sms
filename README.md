@@ -26,7 +26,7 @@ You need to set up the **a message comes in** webhook in for your Twilio SMS num
 * Twillio SMS programmable
 * Deployed on Google App Engine
 
-## Front-end Integration
+## Front-end Integration Example
 You can use any sort of front-end, but as an example, [react-chat-widget](https://www.npmjs.com/package/react-chat-widget) integrates very nicely:
 
 ![demonstration](./chat-demonstration.gif)
