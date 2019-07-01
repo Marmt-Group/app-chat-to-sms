@@ -3,28 +3,22 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const twilio = require('twilio')
-
-const server = require('http').Server(app)
-const io = require('socket.io')(server, {
-    cookie: false
-})
-
 const socketUtils = require('./utils/socketUtils')
-
-app.use(cors())
-app.use(express.json())
-
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
 
 let socketStack = []
 
 // Set socket.io listeners
 io.on('connection', (socket) => {
-    
-    // store socket id
-    console.log(`Socket ${socket.id} connected.`)
-    const inQue = (socketStack.length) ? true : false
-    socketStack.push({ id: socket.id, que: inQue })
-    console.log(socketStack)
+
+    socket.on('add to stack', () => {
+        // store socket id
+        console.log(`Socket ${socket.id} connected.`)
+        const inQue = (socketStack.length) ? true : false
+        socketStack.push({ id: socket.id, que: inQue })
+        console.log(socketStack)
+    })
 
     socket.on('disconnect', () => {
         console.log(`Socket ${socket.id} disconnected.`);
@@ -40,8 +34,11 @@ io.on('connection', (socket) => {
         }
         console.log(socketStack)
     })
-    
+
 })
+
+app.use(cors())
+app.use(express.json())
 
 app.get('/sms', (req, res, next) => {
     // get message from Twilio
@@ -70,9 +67,6 @@ app.post('/chat', (req, res, next) => {
         return res.status(500).send('Missing sms programmable credentials')
     }
 
-    console.log('Connection id: ', connectionId)
-    console.log('First socket id: ', socketStack[0].id)
-
     // check to see if connection is equal to socketStack[0]
     if (connectionId === socketStack[0].id) {
 
@@ -100,9 +94,9 @@ app.post('/chat', (req, res, next) => {
         // emit to the socket client that they are in que
         io.to(`${connectionId}`).emit('added to que')
     }
-    
-})
 
+})
 
 const PORT = process.env.PORT || 8000;
 server.listen(PORT);
+
