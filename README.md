@@ -13,7 +13,10 @@ Once you clone `npm i` isn't necessary
 > you can just deploy right away with 
 
 ```shell
-$ gcloud deploy
+$ heroku create
+$ git commit -am 'socket.io starting point'
+$ git push heroku master
+$ heroku open
 ```
 
 ## Set up Twilio webhook
@@ -24,7 +27,7 @@ You need to set up the **a message comes in** webhook in for your Twilio SMS num
 * Node/Express.js
 * Socket.io
 * Twillio SMS programmable
-* Deployed on Google App Engine
+* Deployed on Heroku
 
 ## Front-end Integration Example
 You can use any sort of front-end, but as an example, [react-chat-widget](https://www.npmjs.com/package/react-chat-widget) integrates very nicely:
