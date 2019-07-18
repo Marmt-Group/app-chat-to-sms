@@ -5,7 +5,7 @@ This application can be utilized by any frontend framework for chat to sms. A us
 ## Installation
 1. Download zip or clone: `git clone https://github.com/Marmt-Group/chat-to-sms.git`
 2. Purchase a Twilio SMS number [https://www.twilio.com/sms](https://www.twilio.com/sms)
-3. Open a Google account, and install [gcloud](https://cloud.google.com/sdk/install).
+3. Open a Heroku account, and install heroku CLI.
 
 ## Deploy
 Once you clone `npm i` isn't necessary
